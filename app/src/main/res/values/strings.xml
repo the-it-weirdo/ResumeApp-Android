@@ -1,4 +1,6 @@
 <resources>
+
+    <!-- General -->
     <string name="app_name">KingoMinho</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
@@ -7,6 +9,7 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Menu -->
     <string name="menu_home">Home</string>
     <string name="menu_contact">Contact</string>
     <string name="menu_skills">Skills</string>
@@ -16,4 +19,21 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Home -->
+    <string name="myName">Debaleen Das Spandan</string>
+    <string name="myAbout">| Ambivert | Intuitive |\n| Skeptical | Die-hard coder |</string>
+    <string name="aboutMe"><u>About Me</u></string>
+
+    <string name="hackerrank_url"><a href="https://www.hackerrank.com/ddsmegh4">Find me on Hackerrank!</a></string>
+    <string name="facebook_url"><a href="https://www.facebook.com/debaleen.spandan">Connect on Facebook.</a></string>
+    <string name="linkedin_url"><a href="https://www.linkedin.com/in/the-it-weirdo/">Get linked on LinkedIn.</a></string>
+
+    <string name="school">Shishu Bihar H.S. School</string>
+    <string name="university">Bengal College of Engineering &amp; Technology</string>
+    <string name="home">Agartala, Tripura</string>
+    <string name="currentlocation">Durgapur, India</string>
+
+    <string name="coverDesc">CoverImg</string>
+    <string name="profileDesc">ProfileImg</string>
 </resources>
