@@ -1,18 +1,25 @@
 package com.example.kingominho;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -94,8 +101,15 @@ public class Home extends Fragment {
         fabMail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent i = new Intent(Intent.ACTION_SEND);
+                //i.setDataAndType(Uri.parse("email"), "message/rfc822");
+                /*i.setData(Uri.parse("email"));*/
+                String email[] ={getResources().getString(R.string.myEmail)};
+                i.setType("message/rfc822"); //Type for email
+                i.putExtra(Intent.EXTRA_EMAIL, email);
+                //i.putExtra(Intent.EXTRA_SUBJECT, "New message from APP. Sent by " + name + ".");
+                Intent chooser = Intent.createChooser(i, "Launch your favourite Email app");
+                startActivity(chooser);
             }
         });
 
@@ -103,10 +117,67 @@ public class Home extends Fragment {
         fabCall.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                if(isPermissionGranted())
+                {
+                    callAction();
+                }
             }
         });
+    }
+
+    private boolean isPermissionGranted()
+    {
+        if(Build.VERSION.SDK_INT>=23)
+        {
+            if(ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
+            {
+                Log.v("Call", "Permission is Granted!!");
+                return  true;
+            }
+            else
+            {
+                Log.v("Call", "Permission is Revoked!!");
+                Toast.makeText(getActivity(), "Please give permission to use call function.", Toast.LENGTH_LONG).show();
+                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE}, 1);
+                return false;
+            }
+        }
+        else
+        {
+            Log.v("Call", "Permission is granted!!");
+            return true;
+        }
+    }
+
+    private void callAction()
+    {
+        Intent i = new Intent(Intent.ACTION_DIAL);
+        i.setData(Uri.parse("tel:7478755667"));
+        startActivity(i);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        // TODO: Check why this function is not getting called. 26/8/19.
+        Log.v("func", "Called");
+        switch(requestCode)
+        {
+            case 1:
+            {
+                Toast.makeText(getActivity(), "Case 1", Toast.LENGTH_SHORT).show();
+                Log.v("Permission Result", "Case 1");
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
+                    Toast.makeText(getActivity(), "Permission is Granted!!", Toast.LENGTH_LONG).show();
+                    callAction();
+                }
+                else
+                {
+                    Toast.makeText(getActivity(), "Permission is Denied!!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+        }
     }
 
     /*// TODO: Rename method, update argument and hook method into UI event

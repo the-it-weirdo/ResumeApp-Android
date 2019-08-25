@@ -9,6 +9,9 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
 
+    <string name="myName">Debaleen Das Spandan</string>
+    <string name="myEmail">ddsmegh18@gmail.com</string>
+
     <!-- Menu -->
     <string name="menu_home">Home</string>
     <string name="menu_contact">Contact</string>
@@ -21,7 +24,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Home -->
-    <string name="myName">Debaleen Das Spandan</string>
     <string name="myAbout">| Ambivert | Intuitive |\n| Skeptical | Die-hard coder |</string>
     <string name="aboutMe"><u>About Me</u></string>
 
