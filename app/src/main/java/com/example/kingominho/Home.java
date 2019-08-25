@@ -92,10 +92,13 @@ public class Home extends Fragment {
         TextView facebook = (TextView)getView().findViewById(R.id.textView9);
         TextView linkedin = (TextView)getView().findViewById(R.id.textView10);
         TextView hackerrank = (TextView)getView().findViewById(R.id.textView11);
+        TextView github = (TextView)getView().findViewById(R.id.textView13);
+
 
         facebook.setMovementMethod(LinkMovementMethod.getInstance());
         linkedin.setMovementMethod(LinkMovementMethod.getInstance());
         hackerrank.setMovementMethod(LinkMovementMethod.getInstance());
+        github.setMovementMethod(LinkMovementMethod.getInstance());
 
         FloatingActionButton fabMail = getView().findViewById(R.id.fabMail);
         fabMail.setOnClickListener(new View.OnClickListener() {

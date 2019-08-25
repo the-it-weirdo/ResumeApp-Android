@@ -24,12 +24,13 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Home -->
-    <string name="myAbout">| Ambivert | Intuitive |\n| Skeptical | Die-hard coder |</string>
+    <string name="myAbout">| Ambivert | Intuitive |\n| Sceptical | Die-hard coder |</string>
     <string name="aboutMe"><u>About Me</u></string>
 
-    <string name="hackerrank_url"><a href="https://www.hackerrank.com/ddsmegh4">Find me on Hackerrank!</a></string>
-    <string name="facebook_url"><a href="https://www.facebook.com/debaleen.spandan">Connect on Facebook.</a></string>
+    <string name="hackerrank_url"><a href="https://www.hackerrank.com/the_it_weirdo/">Find me on Hackerrank!</a></string>
+    <string name="facebook_url"><a href="https://www.facebook.com/the.it.weirdo/">Connect on Facebook.</a></string>
     <string name="linkedin_url"><a href="https://www.linkedin.com/in/the-it-weirdo/">Get linked on LinkedIn.</a></string>
+    <string name="github_url"><a href="https://github.com/the-it-weirdo/">Check out my repositories on GitHub.</a></string>
 
     <string name="school">Shishu Bihar H.S. School</string>
     <string name="university">Bengal College of Engineering &amp; Technology</string>
