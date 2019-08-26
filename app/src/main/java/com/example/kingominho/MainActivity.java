@@ -42,6 +42,11 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
         navigationView.setNavigationItemSelectedListener(this);
+
+        Fragment fragment = new Home();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame, fragment);
+        fragmentTransaction.commit();
     }
 
     @Override
@@ -82,12 +87,17 @@ public class MainActivity extends AppCompatActivity
 
         switch(itemId)
         {
-            case R.id.nav_share:
-                fragment = new ContactFragment();
-                break;
-            case R.id.nav_send:
+            case R.id.nav_home:
                 fragment = new Home();
                 break;
+            case R.id.nav_contact:
+                fragment = new ContactFragment();
+                break;
+            case R.id.nav_skills:
+                fragment = new Skills();
+                break;
+            default:
+                Toast.makeText(getApplicationContext(), "Fragment not ready.", Toast.LENGTH_SHORT).show();
         }
 
         if(fragment != null)
@@ -107,28 +117,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            Intent home = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(home);
-            finish();
-        } else if (id == R.id.nav_contact) {
-            Intent contact = new Intent(getApplicationContext(), Contact.class);
-            startActivity(contact);
-            finish();
-        } else if (id == R.id.nav_skills) {
-            Intent skills = new Intent(getApplicationContext(), Skills.class);
-            startActivity(skills);
-            finish();
-        } else if (id == R.id.nav_project) {
-            Intent project = new Intent(getApplicationContext(), Projects.class);
-            startActivity(project);
-            finish();
-        } else if (id == R.id.nav_share) {
-            //Toast.makeText(getApplicationContext(), "Coming soon", Toast.LENGTH_SHORT).show();
-            showFragment(id);
-        } else if (id == R.id.nav_send) {
-            showFragment(id);
-        }
+        showFragment(id);
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
