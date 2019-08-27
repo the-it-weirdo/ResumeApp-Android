@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--Skills-->
+    <integer-array name="skillIcons">
+        <item>@drawable/ic_java</item>
+        <item>@drawable/ic_c_programming</item>
+        <item>@drawable/ic_python</item>
+        <item>@drawable/ic_android_studio</item>
+    </integer-array>
+
+</resources>

@@ -32,7 +32,8 @@ public class Skills extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    Integer[] imageIDs = {R.drawable.ic_java, R.drawable.ic_python, R.drawable.ic_c_programming, R.drawable.ic_android_studio};
+    //Integer[] imageIDs = {R.drawable.ic_java, R.drawable.ic_c_programming, R.drawable.ic_python,  R.drawable.ic_android_studio};
+    int[] imageIDs = getResources().getIntArray(R.array.skillIcons);
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -90,10 +91,11 @@ public class Skills extends Fragment {
 
         gridView.setAdapter(new ImageAdapterGridView(getContext()));
 
+        final String[] toastStringsProjects = getResources().getStringArray(R.array.toastStringsSkills);
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if(i == 0)
+                /*if(i == 0)
                 {
                     Toast.makeText(getActivity(), "Java is my favourite OOP Language!!", Toast.LENGTH_SHORT).show();
                 }
@@ -108,7 +110,8 @@ public class Skills extends Fragment {
                 else if(i == 3)
                 {
                     Toast.makeText(getActivity(), "Yay!! Android Studio.", Toast.LENGTH_SHORT).show();
-                }
+                }*/
+                Toast.makeText(getActivity(), toastStringsProjects[i], Toast.LENGTH_SHORT).show();
             }
         });
     }
