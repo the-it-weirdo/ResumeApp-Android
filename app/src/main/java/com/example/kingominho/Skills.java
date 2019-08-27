@@ -1,6 +1,7 @@
 package com.example.kingominho;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -8,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,9 +33,6 @@ public class Skills extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    //Integer[] imageIDs = {R.drawable.ic_java, R.drawable.ic_c_programming, R.drawable.ic_python,  R.drawable.ic_android_studio};
-    int[] imageIDs = getResources().getIntArray(R.array.skillIcons);
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -83,34 +82,27 @@ public class Skills extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        getActivity().setTitle(getResources().getString(R.string.skillsLabel));
 
-        getActivity().setTitle("Skills Fragment");
+        //using TypedArray to get R.drawable.* from array referenced in xml
 
+        TypedArray imgTypedArray = getResources().obtainTypedArray(R.array.skillIcons);
+        int[] imageIDs = new int[imgTypedArray.length()];
+        for(int i = 0; i < imgTypedArray.length(); i++)
+        {
+            imageIDs[i] = imgTypedArray.getResourceId(i, -1);
+        }
+        imgTypedArray.recycle();
 
         GridView gridView = (GridView)getView().findViewById(R.id.skillsGrid);
 
-        gridView.setAdapter(new ImageAdapterGridView(getContext()));
+        gridView.setAdapter(new ImageAdapterGridView(getContext(), imageIDs));
 
-        final String[] toastStringsProjects = getResources().getStringArray(R.array.toastStringsSkills);
+        final String[] toastStringsProjects = getActivity().getResources().getStringArray(R.array.toastStringsSkills);
+
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                /*if(i == 0)
-                {
-                    Toast.makeText(getActivity(), "Java is my favourite OOP Language!!", Toast.LENGTH_SHORT).show();
-                }
-                else if(i == 1)
-                {
-                    Toast.makeText(getActivity(), "I am a rookie in Python!!", Toast.LENGTH_SHORT).show();
-                }
-                else if(i == 2)
-                {
-                    Toast.makeText(getActivity(), "I love C language!!", Toast.LENGTH_SHORT).show();
-                }
-                else if(i == 3)
-                {
-                    Toast.makeText(getActivity(), "Yay!! Android Studio.", Toast.LENGTH_SHORT).show();
-                }*/
                 Toast.makeText(getActivity(), toastStringsProjects[i], Toast.LENGTH_SHORT).show();
             }
         });
@@ -119,28 +111,29 @@ public class Skills extends Fragment {
 
     public class ImageAdapterGridView extends BaseAdapter {
         private Context context;
+        private int[] images;
 
-        public ImageAdapterGridView(Context c)
+        public ImageAdapterGridView(Context c, int[] imageIDs)
         {
-            context = c;
+            context = c;images = imageIDs;
         }
 
         @Override
         public int getCount()
         {
-            return imageIDs.length;
+            return images.length;
         }
 
         @Override
         public Object getItem(int position)
         {
-            return null;
+            return position;
         }
 
         @Override
         public long getItemId(int position)
         {
-            return 0;
+            return position;
         }
 
         @Override
@@ -159,7 +152,7 @@ public class Skills extends Fragment {
                 imageView = (ImageView) convertView;
             }
 
-            imageView.setImageResource(imageIDs[position]);
+            imageView.setImageResource(images[position]);
 
             return imageView;
         }

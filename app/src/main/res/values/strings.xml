@@ -12,6 +12,12 @@
     <string name="myName">Debaleen Das Spandan</string>
     <string name="myEmail">ddsmegh18@gmail.com</string>
 
+    <!--Labels-->
+    <string name="homeLabel">Home</string>
+    <string name="contactLabel">Contact</string>
+    <string name="skillsLabel">Skills</string>
+    <string name="projectsLabel">Projects</string>
+
     <!-- Menu -->
     <string name="menu_home">Home</string>
     <string name="menu_contact">Contact</string>
@@ -40,6 +46,11 @@
     <string name="coverDesc">CoverImg</string>
     <string name="profileDesc">ProfileImg</string>
 
+    <string name="mailPrompt">Launch your favourite Email App</string>
+    <string name="mailSubjectString">Please mention your name and reason for contact in the subject.</string>
+
+    <string name="permissionToastCall">Please give permission to use call function.</string>
+
     <!--Skills-->
     <string-array name="toastStringsSkills">
         <item>Java is my favourite OOP language.</item>
@@ -58,7 +69,7 @@
     </string-array>
 
     <string-array name="toastStringsProjects">
-        <item>This is my 1st ever project in Computer Science. I made this during my 1st year of my Bachelors' degree.</item>
+        <item>This is my 1st ever project in Computer Science. I made this during my 1st year of my Bachelor degree.</item>
         <item>This is a simple console program that encrypts a .txt file. Features include password protection.</item>
         <item>This is my 1st project in Android. It shows the registration status of vehicles to users,</item>
         <item>You are using this app. Hope you like it.</item>

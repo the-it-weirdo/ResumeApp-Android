@@ -87,7 +87,7 @@ public class Home extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle("Home Fragment");
+        getActivity().setTitle(getResources().getString(R.string.homeLabel));
 
         TextView facebook = (TextView)getView().findViewById(R.id.textView9);
         TextView linkedin = (TextView)getView().findViewById(R.id.textView10);
@@ -110,8 +110,8 @@ public class Home extends Fragment {
                 String email[] ={getResources().getString(R.string.myEmail)};
                 i.setType("message/rfc822"); //Type for email
                 i.putExtra(Intent.EXTRA_EMAIL, email);
-                //i.putExtra(Intent.EXTRA_SUBJECT, "New message from APP. Sent by " + name + ".");
-                Intent chooser = Intent.createChooser(i, "Launch your favourite Email app");
+                i.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.mailSubjectString));
+                Intent chooser = Intent.createChooser(i, getResources().getString(R.string.mailPrompt));
                 startActivity(chooser);
             }
         });
@@ -140,7 +140,7 @@ public class Home extends Fragment {
             else
             {
                 Log.v("Call", "Permission is Revoked!!");
-                Toast.makeText(getActivity(), "Please give permission to use call function.", Toast.LENGTH_LONG).show();
+                Toast.makeText(getActivity(), getResources().getString(R.string.permissionToastCall), Toast.LENGTH_LONG).show();
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.CALL_PHONE}, 1);
                 return false;
             }
