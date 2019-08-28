@@ -1,7 +1,6 @@
 package com.example.kingominho;
 
 import android.content.Context;
-import android.content.res.TypedArray;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -9,26 +8,24 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
-import android.widget.ImageView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Toast;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Skills . OnFragmentInteractionListener} interface
+ * {@link Projects . OnFragmentInteractionListener} interface
  * to handle interaction events.
- * Use the {@link Skills#newInstance} factory method to
+ * Use the {@link Projects #newInstance} factory method to
  * create an instance of this fragment.
  */
-public class Skills extends Fragment {
+public class Projects extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,7 +37,7 @@ public class Skills extends Fragment {
 
     //private OnFragmentInteractionListener mListener;
 
-    public Skills() {
+    public Projects() {
         // Required empty public constructor
     }
 
@@ -50,11 +47,11 @@ public class Skills extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment Skills.
+     * @return A new instance of fragment Projects.
      */
     // TODO: Rename and change types and number of parameters
-    public static Skills newInstance(String param1, String param2) {
-        Skills fragment = new Skills();
+    public static Projects newInstance(String param1, String param2) {
+        Projects fragment = new Projects();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -75,88 +72,30 @@ public class Skills extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_skills, container, false);
+        return inflater.inflate(R.layout.fragment_projects, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        getActivity().setTitle(getResources().getString(R.string.skillsLabel));
+        final String[] projectList = getResources().getStringArray(R.array.projectsArray);
+        final String[] projectsListToast = getResources().getStringArray(R.array.toastStringsProjects);
 
-        //using TypedArray to get R.drawable.* from array referenced in integers.xml
+        ListView listView = (ListView)getView().findViewById(R.id.projectsListView);
 
-        TypedArray imgTypedArray = getResources().obtainTypedArray(R.array.skillIcons);
-        int[] imageIDs = new int[imgTypedArray.length()];
-        for(int i = 0; i < imgTypedArray.length(); i++)
-        {
-            imageIDs[i] = imgTypedArray.getResourceId(i, -1);
-        }
-        imgTypedArray.recycle();
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, projectList);
+        listView.setAdapter(adapter);
 
-        GridView gridView = (GridView)getView().findViewById(R.id.skillsGrid);
-
-        gridView.setAdapter(new ImageAdapterGridView(getContext(), imageIDs));
-
-        final String[] toastStringsProjects = getActivity().getResources().getStringArray(R.array.toastStringsSkills);
-
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), toastStringsProjects[i], Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(getActivity(), String.valueOf(projectsListToast[i]), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-
-    public class ImageAdapterGridView extends BaseAdapter {
-        private Context context;
-        private int[] images;
-
-        public ImageAdapterGridView(Context c, int[] imageIDs)
-        {
-            context = c;images = imageIDs;
-        }
-
-        @Override
-        public int getCount()
-        {
-            return images.length;
-        }
-
-        @Override
-        public Object getItem(int position)
-        {
-            return position;
-        }
-
-        @Override
-        public long getItemId(int position)
-        {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageView;
-
-            if(convertView == null)
-            {
-                imageView = new ImageView(context);
-                imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setPadding(8,8,8,8);
-            }
-            else
-            {
-                imageView = (ImageView) convertView;
-            }
-
-            imageView.setImageResource(images[position]);
-
-            return imageView;
-        }
-    }
     /*
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
@@ -192,7 +131,8 @@ public class Skills extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    /*public interface OnFragmentInteractionListener {
+    /*
+    public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }*/

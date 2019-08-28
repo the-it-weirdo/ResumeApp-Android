@@ -96,6 +96,9 @@ public class MainActivity extends AppCompatActivity
             case R.id.nav_skills:
                 fragment = new Skills();
                 break;
+            case R.id.nav_project:
+                fragment = new Projects();
+                break;
             default:
                 Toast.makeText(getApplicationContext(), "Fragment not ready.", Toast.LENGTH_SHORT).show();
         }
