@@ -6,16 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".ContactFragment">
 
-    <!--<androidx.core.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">-->
+        android:layout_height="match_parent">-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/phoneImageButton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="8dp"
@@ -33,7 +33,7 @@
                 app:layout_constraintVertical_bias="1.0" />
 
             <ImageButton
-                android:id="@+id/imageButton1"
+                android:id="@+id/messageImageButton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="8dp"
@@ -50,15 +50,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
-            <ImageButton
-                android:id="@+id/imageButton2"
-                android:layout_width="65dp"
-                android:layout_height="65dp"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/ic_message_black_24dp"
-                app:layout_constraintEnd_toEndOf="@+id/imageButton1"
-                app:layout_constraintStart_toStartOf="@+id/imageButton1"
-                app:layout_constraintTop_toBottomOf="parent" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline5"
@@ -82,7 +73,7 @@
                 app:layout_constraintGuide_percent="0.25" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/mailImageButton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="8dp"
@@ -90,14 +81,16 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
+                android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_email_black_24dp"
+                app:layout_constraintBottom_toTopOf="@+id/guideline8"
                 app:layout_constraintEnd_toStartOf="@+id/guideline5"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline9" />
 
             <ImageButton
-                android:id="@+id/imageButton4"
+                android:id="@+id/webImageButton"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
                 android:layout_marginStart="8dp"
@@ -117,7 +110,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!--</androidx.core.widget.NestedScrollView>-->
+    </androidx.core.widget.NestedScrollView>
 
 
 </FrameLayout>

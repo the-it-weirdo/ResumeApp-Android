@@ -1,6 +1,7 @@
 package com.example.kingominho;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -26,7 +27,8 @@ import android.view.Menu;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, Home.OnHomeFragmentInteractionListener,
+        Projects.OnProjectsFragmentInteractionListener, Skills.OnSkillsFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,5 +127,20 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onHomeFragmentInteraction(Uri uri) {
+        //empty body
+    }
+
+    @Override
+    public void onProjectsFragmentInteraction(Uri uri) {
+        //empty body
+    }
+
+    @Override
+    public void onSkillsFragmentInteraction(Uri uri) {
+        //empty body
     }
 }

@@ -23,7 +23,7 @@ import android.widget.Toast;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link Skills . OnFragmentInteractionListener} interface
+ * {@link Skills.OnSkillsFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link Skills#newInstance} factory method to
  * create an instance of this fragment.
@@ -38,7 +38,7 @@ public class Skills extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    //private OnFragmentInteractionListener mListener;
+    private OnSkillsFragmentInteractionListener mListener;
 
     public Skills() {
         // Required empty public constructor
@@ -157,19 +157,19 @@ public class Skills extends Fragment {
             return imageView;
         }
     }
-    /*
+
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+            mListener.onSkillsFragmentInteraction(uri);
         }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnSkillsFragmentInteractionListener) {
+            mListener = (OnSkillsFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -192,8 +192,8 @@ public class Skills extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    /*public interface OnFragmentInteractionListener {
+    public interface OnSkillsFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }*/
+        void onSkillsFragmentInteraction(Uri uri);
+    }
 }
