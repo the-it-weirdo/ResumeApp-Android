@@ -33,9 +33,11 @@ public class Home extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-
     private String mParam1;
     private String mParam2;*/
+
+    static final String emailKey = "Mail.EMAIL";
+    static final String subjectKey = "Mail.SUBJECT";
 
     private OnHomeFragmentInteractionListener mListener;
 
@@ -99,13 +101,17 @@ public class Home extends Fragment {
             @Override
             public void onClick(View view) {
                 String email = getResources().getString(R.string.myEmail);
-                Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + email));
+                String subject = getResources().getString(R.string.mailSubjectString);
+                Bundle bundle = new Bundle();
+                bundle.putString(emailKey, email);
+                bundle.putString(subjectKey, subject);
+                onSendMailButtonPressed(bundle);
+                /*Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + email));
                 //i.setDataAndType(Uri.parse("email"), "message/rfc822");
-                /*i.setData(Uri.parse("email"));*/
+                //i.setData(Uri.parse("email"));
                 //i.setType("message/rfc822"); //Type for email
                 //i.putExtra(Intent.EXTRA_EMAIL, email);
-                intent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.mailSubjectString));
-                onMailButtonPressed(intent);
+                intent.putExtra(Intent.EXTRA_SUBJECT, ));*/
             }
         });
 
@@ -125,11 +131,11 @@ public class Home extends Fragment {
         }
     }
 
-    private void onMailButtonPressed(Intent intent)
+    private void onSendMailButtonPressed(Bundle bundle)
     {
         if(mListener != null)
         {
-            mListener.onMailButtonPressed(intent);
+            mListener.onMailButtonPressed(bundle);
         }
     }
 
@@ -163,6 +169,6 @@ public class Home extends Fragment {
     public interface OnHomeFragmentInteractionListener {
         // TODO: Update argument type and name
         void onCallButtonPressed(Uri uri);
-        void onMailButtonPressed(Intent intent);
+        void onMailButtonPressed(Bundle bundle);
     }
 }

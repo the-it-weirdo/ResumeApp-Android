@@ -31,7 +31,7 @@ import android.widget.Toast;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Home.OnHomeFragmentInteractionListener,
         Projects.OnProjectsFragmentInteractionListener, Skills.OnSkillsFragmentInteractionListener,
-        Contact.OnContactFragmentInteractionListener {
+        Contact.OnContactFragmentInteractionListener,  MailForm.OnMailFormFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +112,7 @@ public class MainActivity extends AppCompatActivity
         {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame, fragment);
-            fragmentTransaction.addToBackStack(null);
+            //fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
 
@@ -194,9 +194,8 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onMailButtonPressed(Intent intent) {
-        Intent chooser = Intent.createChooser(intent, getResources().getString(R.string.mailPrompt));
-        startActivity(chooser);
+    public void onMailButtonPressed(Bundle bundle) {
+        onSendMailButtonPressed(bundle);
     }
 
     //Projects.OnProjectsFragmentInteractionListener
@@ -217,7 +216,7 @@ public class MainActivity extends AppCompatActivity
         MailForm fragment = new MailForm();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame, fragment);
-        fragmentTransaction.addToBackStack(null);
+        //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -229,5 +228,18 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onWebButtonPressed() {
         Toast.makeText(getApplicationContext(), "Button not ready yet.", Toast.LENGTH_SHORT).show();
+    }
+
+    //MailForm.OnMailFormFragmentInteractionListener
+    @Override
+    public void onSendMailButtonPressed(Bundle bundle) {
+        String email = bundle.getString(MailForm.emailKey);
+        String subject = bundle.getString(MailForm.subjectKey);
+        String body = bundle.getString(MailForm.bodyKey);
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:" + email));
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT, body);
+        Intent chooser = Intent.createChooser(intent, getResources().getString(R.string.mailPrompt));
+        startActivity(chooser);
     }
 }

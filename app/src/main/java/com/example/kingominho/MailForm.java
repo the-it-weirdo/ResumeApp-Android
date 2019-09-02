@@ -1,35 +1,44 @@
 package com.example.kingominho;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 
 
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
- * {@link MailForm . OnFragmentInteractionListener} interface
+ * {@link MailForm.OnMailFormFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link MailForm#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class MailForm extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    //private static final String ARG_PARAM1 = "param1";
+    //private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    static final String emailKey = "Mail.EMAIL";
+    static final String subjectKey = "Mail.SUBJECT";
+    static final String bodyKey = "Mail.BODY";
 
-    //private OnFragmentInteractionListener mListener;
+
+    //private String mParam1;
+    //private String mParam2;
+
+    private OnMailFormFragmentInteractionListener mListener;
 
     public MailForm() {
         // Required empty public constructor
@@ -39,27 +48,25 @@ public class MailForm extends Fragment {
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
      *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
      * @return A new instance of fragment MailForm.
      */
     // TODO: Rename and change types and number of parameters
-    public static MailForm newInstance(String param1, String param2) {
+    public static MailForm newInstance() {
         MailForm fragment = new MailForm();
-        Bundle args = new Bundle();
+        /*Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        fragment.setArguments(args);*/
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        /*if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        }*/
     }
 
     @Override
@@ -69,19 +76,78 @@ public class MailForm extends Fragment {
         return inflater.inflate(R.layout.fragment_mail_form, container, false);
     }
 
-    /*
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        getActivity().setTitle(getResources().getString(R.string.mailFormLabel));
+
+        final EditText subjectField = (EditText) getView().findViewById(R.id.subjectText);
+        final EditText bodyField = (EditText) getView().findViewById(R.id.bodyText);
+        Button sendMailButton = (Button) getView().findViewById(R.id.sendMailButton);
+
+        sendMailButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String email = getResources().getString(R.string.myEmail);
+                String subject = subjectField.getText().toString();
+                String body = bodyField.getText().toString();
+
+                if (subject.trim().isEmpty())
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage(R.string.emptySubjectDialogMessage).setTitle(R.string.emptySubjectDialogTitle);
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    subjectField.requestFocus();
+                }
+                else if(body.trim().isEmpty())
+                {
+                    AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                    builder.setMessage(R.string.emptyBodyDialogMessage).setTitle(R.string.emptyBodyDialogTitle);
+                    builder.setCancelable(true);
+                    builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    AlertDialog alert = builder.create();
+                    alert.show();
+                    bodyField.requestFocus();
+                }
+                else {
+                    Bundle bundle = new Bundle();
+                    bundle.putString(emailKey, email);
+                    bundle.putString(subjectKey, subject);
+                    bundle.putString(bodyKey, body);
+                    onSendMailButtonPressed(bundle);
+                }
+            }
+        });
+    }
+
+
+    private void onSendMailButtonPressed(Bundle bundle)
+    {
+        if(mListener != null)
+        {
+            mListener.onSendMailButtonPressed(bundle);
         }
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof OnMailFormFragmentInteractionListener) {
+            mListener = (OnMailFormFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -104,8 +170,8 @@ public class MailForm extends Fragment {
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
      */
-    /*public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }*/
+    public interface OnMailFormFragmentInteractionListener {
+
+        void onSendMailButtonPressed(Bundle bundle);
+    }
 }

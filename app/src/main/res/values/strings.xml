@@ -17,6 +17,7 @@
     <string name="contactLabel">Contact</string>
     <string name="skillsLabel">Skills</string>
     <string name="projectsLabel">Projects</string>
+    <string name="mailFormLabel">Compose Mail</string>
 
     <!-- Menu -->
     <string name="menu_home">Home</string>
@@ -78,6 +79,17 @@
     <!--Contact-->
 
 
+
+    <!--Mail Form-->
+    <string name="subjectTitle">Subject</string>
+    <string name="bodyTitle">Body</string>
+    <string name="subjectDefaultString">Enter your reason for contact here.</string>
+    <string name="bodyDefaultString">Mail body goes here.</string>
+    <string name="buttonText">Send Mail</string>
+    <string name="emptySubjectDialogTitle">Subject Field Empty.</string>
+    <string name="emptySubjectDialogMessage">Please mention your reason for contact in the subject field.</string>
+    <string name="emptyBodyDialogTitle">Body Field Empty.</string>
+    <string name="emptyBodyDialogMessage">Are you sure you want to leave an empty body ?</string>
 
     <string-array name="credits">
         <item>Icons made by <a href="https://www.flaticon.com/authors/hanan" title="Hanan">Hanan</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></item>
