@@ -29,14 +29,12 @@ import android.widget.Toast;
  * create an instance of this fragment.
  */
 public class Skills extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    //private static final String ARG_PARAM1 = "param1";
+    //private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    //private String mParam1;
+    //private String mParam2;
 
     private OnSkillsFragmentInteractionListener mListener;
 
@@ -52,23 +50,23 @@ public class Skills extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment Skills.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static Skills newInstance(String param1, String param2) {
         Skills fragment = new Skills();
-        Bundle args = new Bundle();
+        /*Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        fragment.setArguments(args);*/
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+        /*if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        }*/
     }
 
     @Override
@@ -109,62 +107,6 @@ public class Skills extends Fragment {
     }
 
 
-    public class ImageAdapterGridView extends BaseAdapter {
-        private Context context;
-        private int[] images;
-
-        public ImageAdapterGridView(Context c, int[] imageIDs)
-        {
-            context = c;images = imageIDs;
-        }
-
-        @Override
-        public int getCount()
-        {
-            return images.length;
-        }
-
-        @Override
-        public Object getItem(int position)
-        {
-            return position;
-        }
-
-        @Override
-        public long getItemId(int position)
-        {
-            return position;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ImageView imageView;
-
-            if(convertView == null)
-            {
-                imageView = new ImageView(context);
-                imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
-                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                imageView.setPadding(8,8,8,8);
-            }
-            else
-            {
-                imageView = (ImageView) convertView;
-            }
-
-            imageView.setImageResource(images[position]);
-
-            return imageView;
-        }
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onSkillsFragmentInteraction(uri);
-        }
-    }
-
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -193,7 +135,6 @@ public class Skills extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnSkillsFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onSkillsFragmentInteraction(Uri uri);
     }
 }

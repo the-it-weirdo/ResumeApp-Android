@@ -1,14 +1,16 @@
 package com.example.kingominho;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
+import android.util.Log;
 
-import android.view.View;
-
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 
@@ -28,7 +30,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Home.OnHomeFragmentInteractionListener,
-        Projects.OnProjectsFragmentInteractionListener, Skills.OnSkillsFragmentInteractionListener {
+        Projects.OnProjectsFragmentInteractionListener, Skills.OnSkillsFragmentInteractionListener,
+        Contact.OnContactFragmentInteractionListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,7 +96,7 @@ public class MainActivity extends AppCompatActivity
                 fragment = new Home();
                 break;
             case R.id.nav_contact:
-                fragment = new ContactFragment();
+                fragment = new Contact();
                 break;
             case R.id.nav_skills:
                 fragment = new Skills();
@@ -109,6 +112,7 @@ public class MainActivity extends AppCompatActivity
         {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
             fragmentTransaction.replace(R.id.frame, fragment);
+            fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
 
@@ -129,18 +133,101 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public void onHomeFragmentInteraction(Uri uri) {
-        //empty body
+
+    private boolean isCallPermissionGranted()
+    {
+        if(Build.VERSION.SDK_INT>=23)
+        {
+            if(ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED)
+            {
+                Log.v("Call", "Permission is Granted!!");
+                return  true;
+            }
+            else
+            {
+                Log.v("Call", "Permission is Revoked!!");
+                Toast.makeText(getApplicationContext(), getResources().getString(R.string.permissionToastCall), Toast.LENGTH_LONG).show();
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, 1);
+                return false;
+            }
+        }
+        else
+        {
+            Log.v("Call", "Permission is granted!!");
+            return true;
+        }
     }
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        Log.v("func", "Called");
+        switch(requestCode)
+        {
+            case 1: //for Call
+            {
+                Toast.makeText(getApplicationContext(), "Case 1", Toast.LENGTH_SHORT).show();
+                Log.v("Permission Result", "Case 1");
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)
+                {
+                    Toast.makeText(getApplicationContext(), "Permission is Granted!!", Toast.LENGTH_LONG).show();
+                    //callAction();
+                    onCallButtonPressed(Uri.parse("tel:7478755667"));
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "Permission is Denied!!", Toast.LENGTH_SHORT).show();
+                }
+                break;
+            }
+        }
+    }
+
+
+    //Home.OnHomeFragmentInteractionListener
+    @Override //same for both Contact Fragment and Home fragment
+    public void onCallButtonPressed(Uri uri) {
+        if(isCallPermissionGranted()) {
+            Intent call = new Intent(Intent.ACTION_DIAL);
+            call.setData(uri);
+            startActivity(call);
+        }
+    }
+
+    @Override
+    public void onMailButtonPressed(Intent intent) {
+        Intent chooser = Intent.createChooser(intent, getResources().getString(R.string.mailPrompt));
+        startActivity(chooser);
+    }
+
+    //Projects.OnProjectsFragmentInteractionListener
     @Override
     public void onProjectsFragmentInteraction(Uri uri) {
         //empty body
     }
 
+    //Skills.OnSkillsFragmentInteractionListener
     @Override
     public void onSkillsFragmentInteraction(Uri uri) {
         //empty body
+    }
+
+    //Contact.OnContactFragmentInteractionListener
+    @Override
+    public void onMailButtonPressed() {
+        MailForm fragment = new MailForm();
+        FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.frame, fragment);
+        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    @Override
+    public void onSmsButtonPressed() {
+        Toast.makeText(getApplicationContext(), "Button not ready yet.", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onWebButtonPressed() {
+        Toast.makeText(getApplicationContext(), "Button not ready yet.", Toast.LENGTH_SHORT).show();
     }
 }

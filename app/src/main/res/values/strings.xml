@@ -26,8 +26,6 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!-- Home -->
     <string name="myAbout">| Ambivert | Intuitive |\n| Sceptical | Die-hard coder |</string>
@@ -76,6 +74,9 @@
         <item>This is my 1st project in Machine Learning. This project implements 4 machine learning models to predict the outcome of
         a loan status.</item>
     </string-array>
+
+    <!--Contact-->
+
 
 
     <string-array name="credits">
