@@ -77,7 +77,7 @@
     </string-array>
 
     <!--Contact-->
-
+    <string name="smsPrompt">Choose your favourite SMS app.</string>
 
 
     <!--Mail Form-->

@@ -221,8 +221,12 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onSmsButtonPressed() {
-        Toast.makeText(getApplicationContext(), "Button not ready yet.", Toast.LENGTH_SHORT).show();
+    public void onSmsButtonPressed(Bundle bundle) {
+        //Toast.makeText(getApplicationContext(), "Button not ready yet.", Toast.LENGTH_SHORT).show();
+        String number = bundle.getString(Contact.numberKey);
+        Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + number));
+        Intent chooser = Intent.createChooser(intent, getResources().getString(R.string.smsPrompt));
+        startActivity(chooser);
     }
 
     @Override

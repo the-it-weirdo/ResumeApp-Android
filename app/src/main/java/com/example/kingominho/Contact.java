@@ -32,6 +32,8 @@ public class Contact extends Fragment {
     //private String mParam1;
     //private String mParam2;
 
+    static final String numberKey = "NUMBER";
+
     private OnContactFragmentInteractionListener mListener;
 
     public Contact() {
@@ -100,7 +102,9 @@ public class Contact extends Fragment {
         smsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onSmsButtonPressed();
+                Bundle bundle = new Bundle();
+                bundle.putString(numberKey, "7478755667");
+                onSmsButtonPressed(bundle);
             }
         });
 
@@ -127,11 +131,11 @@ public class Contact extends Fragment {
        }
    }
 
-    private void onSmsButtonPressed()
+    private void onSmsButtonPressed(Bundle bundle)
     {
         if (mListener != null)
         {
-            mListener.onSmsButtonPressed();
+            mListener.onSmsButtonPressed(bundle);
         }
     }
 
@@ -176,7 +180,7 @@ public class Contact extends Fragment {
         // TODO: Update argument type and name
         void onCallButtonPressed(Uri uri);
         void onMailButtonPressed();
-        void onSmsButtonPressed();
+        void onSmsButtonPressed(Bundle bundle);
         void onWebButtonPressed();
     }
 }
