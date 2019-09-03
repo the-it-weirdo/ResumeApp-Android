@@ -108,10 +108,11 @@ public class Contact extends Fragment {
             }
         });
 
+        final String link = getActivity().getResources().getString(R.string.blogLink);
         webButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onWebButtonPressed();
+                onWebButtonPressed(link);
             }
         });
     }
@@ -139,11 +140,11 @@ public class Contact extends Fragment {
         }
     }
 
-    private void onWebButtonPressed()
+    private void onWebButtonPressed(String url)
     {
         if (mListener != null)
         {
-            mListener.onWebButtonPressed();
+            mListener.onWebButtonPressed(url);
         }
     }
 
@@ -181,6 +182,6 @@ public class Contact extends Fragment {
         void onCallButtonPressed(Uri uri);
         void onMailButtonPressed();
         void onSmsButtonPressed(Bundle bundle);
-        void onWebButtonPressed();
+        void onWebButtonPressed(String url);
     }
 }

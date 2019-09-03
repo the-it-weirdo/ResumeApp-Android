@@ -18,6 +18,7 @@
     <string name="skillsLabel">Skills</string>
     <string name="projectsLabel">Projects</string>
     <string name="mailFormLabel">Compose Mail</string>
+    <string name="webViewLabel">Blog</string>
 
     <!-- Menu -->
     <string name="menu_home">Home</string>
@@ -78,6 +79,7 @@
 
     <!--Contact-->
     <string name="smsPrompt">Choose your favourite SMS app.</string>
+    <string name="blogLink">https://www.mindswindow.me</string>
 
 
     <!--Mail Form-->
@@ -94,6 +96,9 @@
     <string-array name="credits">
         <item>Icons made by <a href="https://www.flaticon.com/authors/hanan" title="Hanan">Hanan</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
