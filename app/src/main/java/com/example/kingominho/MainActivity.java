@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
+import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -37,6 +38,16 @@ public class MainActivity extends AppCompatActivity
         WebViewFragment.OnWebViewFragmentInteractionListener{
 
     private static final String webViewFragmentTag = "WEB_FRAGMENT";
+    private boolean mBackPressedOnce;
+    private Handler mHandler = new Handler();
+    private Runnable mRunnable = new Runnable() {
+        @Override
+        public void run() {
+            mBackPressedOnce = false;
+        }
+    };
+    private int delay = 2000;
+    private Toast mToast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +83,28 @@ public class MainActivity extends AppCompatActivity
         } else if (fragment != null && fragment.isVisible()) {
             fragment.webNavigation();
         } else {
-            super.onBackPressed();
+            if(mBackPressedOnce)
+            {
+                super.onBackPressed();
+                return;
+            }
+
+            this.mBackPressedOnce = true;
+            String mMessage = getResources().getString(R.string.pressBackTwice);
+            mToast = Toast.makeText(getApplicationContext(), mMessage, Toast.LENGTH_SHORT);
+            mToast.show();
+
+            mHandler.postDelayed(mRunnable, delay);
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mToast.cancel();
+        if(mHandler != null)
+        {
+            mHandler.removeCallbacks(mRunnable);
         }
     }
 
