@@ -101,7 +101,8 @@ public class Skills extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getActivity(), toastStringsProjects[i], Toast.LENGTH_SHORT).show();
+                mListener.onSkillsFragmentGridViewInteraction(i, toastStringsProjects);
+                //Toast.makeText(getActivity(), toastStringsProjects[i], Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -135,6 +136,6 @@ public class Skills extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnSkillsFragmentInteractionListener {
-        void onSkillsFragmentInteraction(Uri uri);
+        void onSkillsFragmentGridViewInteraction(int i, String[] toastArray);
     }
 }

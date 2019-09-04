@@ -89,12 +89,11 @@ public class MailForm extends Fragment {
         sendMailButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String email = getResources().getString(R.string.myEmail);
-                String subject = subjectField.getText().toString();
-                String body = bodyField.getText().toString();
+                final String email = getResources().getString(R.string.myEmail);
+                final String subject = subjectField.getText().toString();
+                final String body = bodyField.getText().toString();
 
-                if (subject.trim().isEmpty())
-                {
+                if (subject.trim().isEmpty()) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setMessage(R.string.emptySubjectDialogMessage).setTitle(R.string.emptySubjectDialogTitle);
                     builder.setCancelable(true);
@@ -107,13 +106,19 @@ public class MailForm extends Fragment {
                     AlertDialog alert = builder.create();
                     alert.show();
                     subjectField.requestFocus();
-                }
-                else if(body.trim().isEmpty())
-                {
+                } else if (body.trim().isEmpty()) {
+                    bodyField.requestFocus();
                     AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
                     builder.setMessage(R.string.emptyBodyDialogMessage).setTitle(R.string.emptyBodyDialogTitle);
                     builder.setCancelable(true);
                     builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            Bundle bundle = makeMailBundle(email, subject, body);
+                            onSendMailButtonPressed(bundle);
+                        }
+                    });
+                    builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.cancel();
@@ -121,24 +126,25 @@ public class MailForm extends Fragment {
                     });
                     AlertDialog alert = builder.create();
                     alert.show();
-                    bodyField.requestFocus();
-                }
-                else {
-                    Bundle bundle = new Bundle();
-                    bundle.putString(emailKey, email);
-                    bundle.putString(subjectKey, subject);
-                    bundle.putString(bodyKey, body);
+                } else {
+                    Bundle bundle = makeMailBundle(email, subject, body);
                     onSendMailButtonPressed(bundle);
                 }
             }
         });
     }
 
+    private Bundle makeMailBundle(String email, String subject, String body) {
+        Bundle bundle = new Bundle();
+        bundle.putString(emailKey, email);
+        bundle.putString(subjectKey, subject);
+        bundle.putString(bodyKey, body);
+        return bundle;
+    }
 
-    private void onSendMailButtonPressed(Bundle bundle)
-    {
-        if(mListener != null)
-        {
+
+    private void onSendMailButtonPressed(Bundle bundle) {
+        if (mListener != null) {
             mListener.onSendMailButtonPressed(bundle);
         }
     }

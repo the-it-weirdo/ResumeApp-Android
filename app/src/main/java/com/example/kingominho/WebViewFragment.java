@@ -151,7 +151,9 @@ public class WebViewFragment extends Fragment {
 
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        webSettings.setLoadWithOverviewMode(true);
+        webSettings.setBuiltInZoomControls(true);
+        webSettings.setSupportZoom(true);
+        //webSettings.setLoadWithOverviewMode(true);
         //webSettings.setUseWideViewPort(true);
         String url = getActivity().getResources().getString(R.string.blogLink);
         webView.loadUrl(url);

@@ -11,7 +11,7 @@ public class ImageAdapterGridView extends BaseAdapter {
     private Context context;
     private int[] images;
 
-    public ImageAdapterGridView(Context c, int[] imageIDs)
+    ImageAdapterGridView(Context c, int[] imageIDs)
     {
         context = c;images = imageIDs;
     }

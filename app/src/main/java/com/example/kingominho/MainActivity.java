@@ -198,14 +198,14 @@ public class MainActivity extends AppCompatActivity
 
     //Projects.OnProjectsFragmentInteractionListener
     @Override
-    public void onProjectsFragmentInteraction(Uri uri) {
-        //empty body
+    public void onProjectsFragmentListViewInteraction(int i, String[] toastArray) {
+        Toast.makeText(getApplicationContext(), String.valueOf(toastArray[i]), Toast.LENGTH_SHORT).show();
     }
 
     //Skills.OnSkillsFragmentInteractionListener
     @Override
-    public void onSkillsFragmentInteraction(Uri uri) {
-        //empty body
+    public void onSkillsFragmentGridViewInteraction(int i, String[] toastArray) {
+        Toast.makeText(getApplicationContext(), toastArray[i], Toast.LENGTH_SHORT).show();
     }
 
     //Contact.OnContactFragmentInteractionListener
@@ -232,7 +232,7 @@ public class MainActivity extends AppCompatActivity
         WebViewFragment fragment = new WebViewFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame, fragment, webViewFragmentTag);
-        fragmentTransaction.addToBackStack(null);
+        //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
@@ -252,6 +252,6 @@ public class MainActivity extends AppCompatActivity
     // WebViewFragment.OnFragmentInteractionListener
     @Override
     public void onWebViewFragmentInteraction(View view) {
-
+        //empty body
     }
 }

@@ -89,8 +89,8 @@ public class Projects extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                Toast.makeText(getActivity(), String.valueOf(projectsListToast[i]), Toast.LENGTH_SHORT).show();
+                mListener.onProjectsFragmentListViewInteraction(i, projectsListToast);
+                //Toast.makeText(getActivity(), String.valueOf(projectsListToast[i]), Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -125,6 +125,6 @@ public class Projects extends Fragment {
      */
 
     public interface OnProjectsFragmentInteractionListener {
-        void onProjectsFragmentInteraction(Uri uri);
+        void onProjectsFragmentListViewInteraction(int i, String[] toastArray);
     }
 }
