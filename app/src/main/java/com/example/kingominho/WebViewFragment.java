@@ -35,12 +35,12 @@ import android.widget.Toast;
 public class WebViewFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    //private static final String ARG_PARAM1 = "param1";
+    //private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    //private String mParam1;
+    //private String mParam2;
 
     private OnWebViewFragmentInteractionListener mListener;
 
@@ -61,20 +61,20 @@ public class WebViewFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static WebViewFragment newInstance(String param1, String param2) {
         WebViewFragment fragment = new WebViewFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+        //Bundle args = new Bundle();
+        //args.putString(ARG_PARAM1, param1);
+        //args.putString(ARG_PARAM2, param2);
+        //fragment.setArguments(args);
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        //if (getArguments() != null) {
+            //mParam1 = getArguments().getString(ARG_PARAM1);
+            //mParam2 = getArguments().getString(ARG_PARAM2);
+        //}
     }
 
     @Override
@@ -155,7 +155,14 @@ public class WebViewFragment extends Fragment {
         //webSettings.setLoadWithOverviewMode(true);
         //webSettings.setUseWideViewPort(true);
         String url = getActivity().getResources().getString(R.string.blogLink);
-        webView.loadUrl(url);
+        if(mListener.isInternetConnected())
+        {
+            webView.loadUrl(url);
+        }
+        else
+        {
+            mListener.internetNotConnected();
+        }
 
         //mListener.onWebViewFragmentInteraction(webView);
     }
@@ -198,6 +205,7 @@ public class WebViewFragment extends Fragment {
      */
     public interface OnWebViewFragmentInteractionListener {
         // TODO: Update argument type and name
-        void onWebViewFragmentInteraction(View view);
+        boolean isInternetConnected();
+        void internetNotConnected();
     }
 }

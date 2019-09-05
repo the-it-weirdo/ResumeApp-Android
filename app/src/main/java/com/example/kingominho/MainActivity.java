@@ -1,8 +1,13 @@
 package com.example.kingominho;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.ConnectivityManager;
+import android.net.InetAddresses;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +16,7 @@ import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -30,6 +36,8 @@ import android.view.Menu;
 import android.view.View;
 import android.webkit.WebView;
 import android.widget.Toast;
+
+import java.net.InetAddress;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Home.OnHomeFragmentInteractionListener,
@@ -192,6 +200,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         Log.v("func", "Called");
@@ -281,9 +290,36 @@ public class MainActivity extends AppCompatActivity
         startActivity(chooser);
     }
 
+
+
     // WebViewFragment.OnFragmentInteractionListener
     @Override
-    public void onWebViewFragmentInteraction(View view) {
-        //empty body
+    public boolean isInternetConnected()
+    {
+        try
+        {
+            InetAddress ipAddress = InetAddress.getByName("www.google.com");
+
+            return !ipAddress.toString().equals("");
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
+
+    @Override
+    public void internetNotConnected() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+        builder.setMessage(R.string.noInternetMessage).setTitle(R.string.noInternetTitle);
+        builder.setCancelable(false);
+        builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }
