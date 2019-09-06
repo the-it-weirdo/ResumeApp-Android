@@ -1,8 +1,6 @@
 package com.example.kingominho;
 
 import android.Manifest;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -32,7 +30,6 @@ import android.view.Menu;
 
 import android.widget.Toast;
 
-import java.net.InetAddress;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Home.OnHomeFragmentInteractionListener,
@@ -85,7 +82,7 @@ public class MainActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else if (fragment != null && fragment.isVisible()) {
             fragment.webNavigation();
-        } else {
+        }  else {
             if (mBackPressedOnce) {
                 super.onBackPressed();
                 return;
@@ -103,8 +100,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if(mToast != null)
-        {
+        if (mToast != null) {
             mToast.cancel();
         }
         if (mHandler != null) {
@@ -214,9 +210,8 @@ public class MainActivity extends AppCompatActivity
                 }
                 break;
             }
-            default:
-            {
-                Log.v("onReqPermissionsRes", "default case reached. requestCode = "+requestCode);
+            default: {
+                Log.v("onReqPermissionsRes", "default case reached. requestCode = " + requestCode);
             }
         }
     }
@@ -271,11 +266,15 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onWebButtonPressed(String url) {
         WebViewFragment fragment = new WebViewFragment();
+        Bundle args = new Bundle();
+        args.putString("url", url);
+        fragment.setArguments(args);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame, fragment, webViewFragmentTag);
         //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
 
     //MailForm.OnMailFormFragmentInteractionListener
     @Override
@@ -290,31 +289,9 @@ public class MainActivity extends AppCompatActivity
         startActivity(chooser);
     }
 
-
-    // WebViewFragment.OnFragmentInteractionListener
+    //WebViewFragment.OnWebViewFragmentInteractionListener
     @Override
-    public boolean isInternetConnected() {
-        try {
-            InetAddress ipAddress = InetAddress.getByName("www.google.com");
-
-            return !ipAddress.toString().equals("");
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    @Override
-    public void internetNotConnected() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-        builder.setMessage(R.string.noInternetMessage).setTitle(R.string.noInternetTitle);
-        builder.setCancelable(false);
-        builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-                dialogInterface.cancel();
-            }
-        });
-        AlertDialog alert = builder.create();
-        alert.show();
+    public void onWebViewFragmentBackButtonPressedFromHomeWebsite() {
+        showFragment(R.id.nav_contact);
     }
 }

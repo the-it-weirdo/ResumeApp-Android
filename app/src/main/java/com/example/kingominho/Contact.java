@@ -1,6 +1,8 @@
 package com.example.kingominho;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,11 +11,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+
+import java.net.InetAddress;
 
 
 /**
@@ -118,39 +123,57 @@ public class Contact extends Fragment {
     }
 
 
-   private void onCallButtonPressed(Uri uri) {
-       if (mListener != null) {
-           mListener.onCallButtonPressed(uri);
-       }
-   }
+    private void onCallButtonPressed(Uri uri) {
+        if (mListener != null) {
+            mListener.onCallButtonPressed(uri);
+        }
+    }
 
-   private void onMailButtonPressed()
-   {
-       if (mListener != null)
-       {
-           mListener.onMailButtonPressed();
-       }
-   }
+    private void onMailButtonPressed() {
+        if (mListener != null) {
+            mListener.onMailButtonPressed();
+        }
+    }
 
-    private void onSmsButtonPressed(Bundle bundle)
-    {
-        if (mListener != null)
-        {
+    private void onSmsButtonPressed(Bundle bundle) {
+        if (mListener != null) {
             mListener.onSmsButtonPressed(bundle);
         }
     }
 
-    private void onWebButtonPressed(String url)
-    {
-        if (mListener != null)
-        {
-            mListener.onWebButtonPressed(url);
+    private void onWebButtonPressed(String url) {
+        if (mListener != null) {
+            if (isInternetConnected()) {
+                mListener.onWebButtonPressed(url);
+            } else {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+                builder.setMessage(R.string.noInternetMessage).setTitle(R.string.noInternetTitle);
+                builder.setCancelable(false);
+                builder.setPositiveButton("Okay", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog alert = builder.create();
+                alert.show();
+                //mListener.internetNotConnected();
+            }
         }
     }
 
+    private boolean isInternetConnected() {
+        if(getActivity() != null)
+        {
+            return DetectConnection.checkInternetConnection(getActivity());
+        }
+        else
+        {
+            return false;
+        }
+    }
 
-
-   @Override
+    @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         if (context instanceof OnContactFragmentInteractionListener) {
@@ -180,8 +203,12 @@ public class Contact extends Fragment {
     public interface OnContactFragmentInteractionListener {
         // TODO: Update argument type and name
         void onCallButtonPressed(Uri uri);
+
         void onMailButtonPressed();
+
         void onSmsButtonPressed(Bundle bundle);
+
         void onWebButtonPressed(String url);
+
     }
 }

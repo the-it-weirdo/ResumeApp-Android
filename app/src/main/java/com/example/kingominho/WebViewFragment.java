@@ -35,11 +35,11 @@ import android.widget.Toast;
 public class WebViewFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    //private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM1 = "url";
     //private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    //private String mParam1;
+    private String mParam1;
     //private String mParam2;
 
     private OnWebViewFragmentInteractionListener mListener;
@@ -71,10 +71,10 @@ public class WebViewFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //if (getArguments() != null) {
-        //mParam1 = getArguments().getString(ARG_PARAM1);
-        //mParam2 = getArguments().getString(ARG_PARAM2);
-        //}
+        if (getArguments() != null) {
+            mParam1 = getArguments().getString(ARG_PARAM1);
+            //mParam2 = getArguments().getString(ARG_PARAM2);
+        }
     }
 
     @Override
@@ -142,19 +142,20 @@ public class WebViewFragment extends Fragment {
         webSettings.setSupportZoom(true);
         //webSettings.setLoadWithOverviewMode(true);
         //webSettings.setUseWideViewPort(true);
-        String url = getActivity().getResources().getString(R.string.blogLink);
-        if (mListener.isInternetConnected()) {
+        //String url = getActivity().getResources().getString(R.string.blogLink);
+        if (mParam1 != null) {
+            String url = mParam1;
             webView.loadUrl(url);
-        } else {
-            mListener.internetNotConnected();
         }
-
-        //mListener.onWebViewFragmentInteraction(webView);
     }
 
+    //mListener.onWebViewFragmentInteraction(webView);
+
     void webNavigation() {
-        if (webView.canGoBack()) {
+        if (webView != null && webView.canGoBack()) {
             webView.goBack();
+        } else {
+            mListener.onWebViewFragmentBackButtonPressedFromHomeWebsite();
         }
     }
 
@@ -187,8 +188,6 @@ public class WebViewFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnWebViewFragmentInteractionListener {
-        boolean isInternetConnected();
-
-        void internetNotConnected();
+        void onWebViewFragmentBackButtonPressedFromHomeWebsite();
     }
 }
