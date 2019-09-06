@@ -72,8 +72,8 @@ public class WebViewFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         //if (getArguments() != null) {
-            //mParam1 = getArguments().getString(ARG_PARAM1);
-            //mParam2 = getArguments().getString(ARG_PARAM2);
+        //mParam1 = getArguments().getString(ARG_PARAM1);
+        //mParam2 = getArguments().getString(ARG_PARAM2);
         //}
     }
 
@@ -94,26 +94,20 @@ public class WebViewFragment extends Fragment {
         //ProgressBar progressBar = new ProgressBar();
 
 
-        webView.setWebViewClient(new WebViewClient(){
+        webView.setWebViewClient(new WebViewClient() {
 
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
 
-                if(URLUtil.isNetworkUrl(url))
-                {
+                if (URLUtil.isNetworkUrl(url)) {
                     return false;
-                }
-                else
-                {
-                    try
-                    {
+                } else {
+                    try {
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse(url));
                         startActivity(intent);
-                    }
-                    catch(ActivityNotFoundException e)
-                    {
+                    } catch (ActivityNotFoundException e) {
                         //Toast.makeText(getActivity(), url, Toast.LENGTH_SHORT).show();
                         Toast.makeText(getActivity(), "Appropriate Application not installed.", Toast.LENGTH_SHORT).show();
                     }
@@ -126,21 +120,15 @@ public class WebViewFragment extends Fragment {
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
                 //return super.shouldOverrideUrlLoading(view, request);
 
-                if(URLUtil.isNetworkUrl(request.getUrl().toString()))
-                {
+                if (URLUtil.isNetworkUrl(request.getUrl().toString())) {
                     return false;
-                }
-                else
-                {
-                    try
-                    {
+                } else {
+                    try {
                         Intent intent = new Intent();
                         intent.setAction(Intent.ACTION_VIEW);
                         intent.setData(Uri.parse(request.getUrl().toString()));
                         startActivity(intent);
-                    }
-                    catch(ActivityNotFoundException e)
-                    {
+                    } catch (ActivityNotFoundException e) {
                         //Toast.makeText(getActivity(), request.getUrl().toString(), Toast.LENGTH_SHORT).show();
                         Toast.makeText(getActivity(), "Appropriate Application not installed.", Toast.LENGTH_SHORT).show();
                     }
@@ -155,22 +143,17 @@ public class WebViewFragment extends Fragment {
         //webSettings.setLoadWithOverviewMode(true);
         //webSettings.setUseWideViewPort(true);
         String url = getActivity().getResources().getString(R.string.blogLink);
-        if(mListener.isInternetConnected())
-        {
+        if (mListener.isInternetConnected()) {
             webView.loadUrl(url);
-        }
-        else
-        {
+        } else {
             mListener.internetNotConnected();
         }
 
         //mListener.onWebViewFragmentInteraction(webView);
     }
 
-    void webNavigation()
-    {
-        if(webView.canGoBack())
-        {
+    void webNavigation() {
+        if (webView.canGoBack()) {
             webView.goBack();
         }
     }
@@ -204,8 +187,8 @@ public class WebViewFragment extends Fragment {
      * >Communicating with Other Fragments</a> for more information.
      */
     public interface OnWebViewFragmentInteractionListener {
-        // TODO: Update argument type and name
         boolean isInternetConnected();
+
         void internetNotConnected();
     }
 }

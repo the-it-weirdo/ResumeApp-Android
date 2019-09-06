@@ -102,8 +102,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
-
-
     <string-array name="credits">
         <item>Icons made by <a href="https://www.flaticon.com/authors/hanan" title="Hanan">Hanan</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></item>
     </string-array>

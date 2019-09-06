@@ -2,12 +2,9 @@ package com.example.kingominho;
 
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.ConnectivityManager;
-import android.net.InetAddresses;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -16,7 +13,6 @@ import android.os.Handler;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.view.GravityCompat;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -33,8 +29,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.view.Menu;
-import android.view.View;
-import android.webkit.WebView;
+
 import android.widget.Toast;
 
 import java.net.InetAddress;
@@ -43,7 +38,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Home.OnHomeFragmentInteractionListener,
         Projects.OnProjectsFragmentInteractionListener, Skills.OnSkillsFragmentInteractionListener,
         Contact.OnContactFragmentInteractionListener, MailForm.OnMailFormFragmentInteractionListener,
-        WebViewFragment.OnWebViewFragmentInteractionListener{
+        WebViewFragment.OnWebViewFragmentInteractionListener {
 
     private static final String webViewFragmentTag = "WEB_FRAGMENT";
     private boolean mBackPressedOnce;
@@ -91,8 +86,7 @@ public class MainActivity extends AppCompatActivity
         } else if (fragment != null && fragment.isVisible()) {
             fragment.webNavigation();
         } else {
-            if(mBackPressedOnce)
-            {
+            if (mBackPressedOnce) {
                 super.onBackPressed();
                 return;
             }
@@ -109,9 +103,11 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        mToast.cancel();
-        if(mHandler != null)
+        if(mToast != null)
         {
+            mToast.cancel();
+        }
+        if (mHandler != null) {
             mHandler.removeCallbacks(mRunnable);
         }
     }
@@ -124,7 +120,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -171,7 +167,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
@@ -217,6 +213,10 @@ public class MainActivity extends AppCompatActivity
                     Toast.makeText(getApplicationContext(), "Permission is Denied!!", Toast.LENGTH_SHORT).show();
                 }
                 break;
+            }
+            default:
+            {
+                Log.v("onReqPermissionsRes", "default case reached. requestCode = "+requestCode);
             }
         }
     }
@@ -291,19 +291,14 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-
     // WebViewFragment.OnFragmentInteractionListener
     @Override
-    public boolean isInternetConnected()
-    {
-        try
-        {
+    public boolean isInternetConnected() {
+        try {
             InetAddress ipAddress = InetAddress.getByName("www.google.com");
 
             return !ipAddress.toString().equals("");
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return false;
         }
     }
