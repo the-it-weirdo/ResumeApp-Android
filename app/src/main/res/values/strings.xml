@@ -29,6 +29,23 @@
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
 
+    <!--Swipe Menu-->
+    <string-array name="menu_array">
+        <item>Home</item>
+        <item>Contact</item>
+        <item>Skills</item>
+        <item>Projects</item>
+        <item>About</item>
+    </string-array>
+
+    <string-array name="menu_desc_array">
+        <item>Few facts about me</item>
+        <item>Get in touch!</item>
+        <item>Check out my skills</item>
+        <item>Showcasing my projects</item>
+        <item>App about and attributions</item>
+    </string-array>
+
 
     <!-- Home -->
     <string name="myAbout">| Ambivert | Intuitive |\n| Sceptical | Die-hard coder |</string>

@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
+import androidx.cardview.widget.CardView;
 import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.List;
@@ -44,7 +45,9 @@ public class Adapter extends PagerAdapter {
 
         ImageView imageView, icon;
         TextView title, desc;
+        CardView cardView;
 
+        cardView = view.findViewById(R.id.cardView);
         icon = view.findViewById(R.id.nav_icon);
         imageView = view.findViewById(R.id.image);
         title = view.findViewById(R.id.title);
@@ -57,7 +60,7 @@ public class Adapter extends PagerAdapter {
         desc.setText(models.get(position).getDesc());
 
 
-        view.setOnClickListener(new View.OnClickListener() {
+        cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, DetailsActivity.class);

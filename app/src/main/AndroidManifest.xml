@@ -18,7 +18,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
         <activity android:name=".DetailsActivity"
-            android:theme="@style/DetailScreenTheme"/>
+            android:theme="@style/DetailScreenTheme"
+            android:configChanges="layoutDirection|keyboard|keyboardHidden|orientation|screenSize|smallestScreenSize|screenLayout|uiMode"/>
         <activity android:name=".SwipeMenuActivity"
             android:theme="@style/SwipeViewTheme"/>
 

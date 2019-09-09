@@ -9,4 +9,21 @@
         <item>@drawable/ic_android_studio</item>
     </integer-array>
 
+    <!--Menu-->
+    <integer-array name="menu_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_address_card</item>
+        <item>@drawable/ic_skills</item>
+        <item>@drawable/ic_project</item>
+        <item>@drawable/ic_info_outline_black_24dp</item>
+    </integer-array>
+
+    <integer-array name="menu_skins">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_address_card</item>
+        <item>@drawable/ic_skills</item>
+        <item>@drawable/skin_project</item>
+        <item>@drawable/ic_info_outline_black_24dp</item>
+    </integer-array>
+
 </resources>

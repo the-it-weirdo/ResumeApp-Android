@@ -7,9 +7,10 @@
     <color name="black">#000000</color>
     <color name="black_overlay">#ffffffff</color>
 
-    <color name="color1">#424549</color>
+    <color name="color1">#59717c</color>
     <color name="color2">#7e455e</color>
     <color name="color3">#796e25</color>
-    <color name="color4">#59717c</color>
+    <color name="color4">#424549</color>
+    <color name="color5">#0E5E80</color>
 
 </resources>

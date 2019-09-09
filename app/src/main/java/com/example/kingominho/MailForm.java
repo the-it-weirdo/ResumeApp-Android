@@ -149,6 +149,15 @@ public class MailForm extends Fragment {
         }
     }
 
+    void onBackButtonPressed()
+    {
+        if(mListener != null)
+        {
+            mListener.onBackPressedFromMailForm();
+        }
+    }
+
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -179,5 +188,6 @@ public class MailForm extends Fragment {
     public interface OnMailFormFragmentInteractionListener {
 
         void onSendMailButtonPressed(Bundle bundle);
+        void onBackPressedFromMailForm();
     }
 }

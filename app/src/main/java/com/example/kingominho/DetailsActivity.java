@@ -24,23 +24,29 @@ public class DetailsActivity extends AppCompatActivity implements Home.OnHomeFra
         WebViewFragment.OnWebViewFragmentInteractionListener {
 
     private static final String webViewFragmentTag = "WEB_FRAGMENT";
+    private static final String mailFormFragmentTag = "MAILFORM_FRAGMENT";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details);
 
-        String param = getIntent().getStringExtra("param");
-
-        showFragment(param);
+        if (savedInstanceState == null) {
+            String param = getIntent().getStringExtra("param");
+            showFragment(param);
+        }
     }
 
     @Override
     public void onBackPressed() {
-        WebViewFragment fragment = (WebViewFragment) getSupportFragmentManager().findFragmentByTag(webViewFragmentTag);
-        if (fragment != null && fragment.isVisible()) {
-            fragment.webNavigation();
-        } else {
+        WebViewFragment webViewFragment = (WebViewFragment) getSupportFragmentManager().findFragmentByTag(webViewFragmentTag);
+        MailForm mailForm = (MailForm) getSupportFragmentManager().findFragmentByTag(mailFormFragmentTag);
+        if (mailForm != null && mailForm.isVisible()) {
+            mailForm.onBackButtonPressed();
+        } else if (webViewFragment != null && webViewFragment.isVisible()) {
+            webViewFragment.webNavigation();
+        }
+        else {
             super.onBackPressed();
         }
     }
@@ -148,7 +154,7 @@ public class DetailsActivity extends AppCompatActivity implements Home.OnHomeFra
     public void onMailButtonPressed() {
         MailForm fragment = new MailForm();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame, fragment);
+        fragmentTransaction.replace(R.id.frame, fragment, mailFormFragmentTag);
         //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
@@ -186,6 +192,11 @@ public class DetailsActivity extends AppCompatActivity implements Home.OnHomeFra
         intent.putExtra(Intent.EXTRA_TEXT, body);
         Intent chooser = Intent.createChooser(intent, getResources().getString(R.string.mailPrompt));
         startActivity(chooser);
+    }
+
+    @Override
+    public void onBackPressedFromMailForm() {
+        showFragment("Contact");
     }
 
     //WebViewFragment.OnWebViewFragmentInteractionListener

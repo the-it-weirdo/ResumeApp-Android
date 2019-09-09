@@ -294,4 +294,9 @@ public class MainActivity extends AppCompatActivity
     public void onWebViewFragmentBackButtonPressedFromHomeWebsite() {
         showFragment(R.id.nav_contact);
     }
+
+    @Override
+    public void onBackPressedFromMailForm() {
+        showFragment(R.id.nav_contact);
+    }
 }
