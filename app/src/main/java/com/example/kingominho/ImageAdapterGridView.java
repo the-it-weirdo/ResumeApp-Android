@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 
 public class ImageAdapterGridView extends BaseAdapter {
     private Context context;
@@ -42,8 +43,8 @@ public class ImageAdapterGridView extends BaseAdapter {
         {
             imageView = new ImageView(context);
             imageView.setLayoutParams(new GridView.LayoutParams(300, 300));
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setPadding(8,8,8,8);
+            imageView.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            imageView.setPadding(10,10,10,10);
         }
         else
         {
