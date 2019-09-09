@@ -5,10 +5,12 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+
 import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.List;
@@ -40,18 +42,21 @@ public class Adapter extends PagerAdapter {
         layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.item, container, false);
 
-        ImageView imageView;
+        ImageView imageView, icon;
         TextView title, desc;
 
+        icon = view.findViewById(R.id.nav_icon);
         imageView = view.findViewById(R.id.image);
         title = view.findViewById(R.id.title);
         desc = view.findViewById(R.id.desc);
 
+
+        icon.setImageResource(models.get(position).getIcon());
         imageView.setImageResource(models.get(position).getImage());
         title.setText(models.get(position).getTitle());
         desc.setText(models.get(position).getDesc());
 
-        //TODO:Change intent target.
+
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

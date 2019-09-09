@@ -14,26 +14,37 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="400dp">
+            android:layout_height="450dp">
 
             <ImageView
                 android:id="@+id/image"
-                android:src="@drawable/ic_project"
-                android:scaleType="fitCenter"
+                android:src="@drawable/skin_project"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="10dp"/>
+                android:scaleType="fitXY"
+                android:layout_height="300dp"/>
+
+            <ImageView
+                android:id="@+id/nav_icon"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignBottom="@id/image"
+                android:scaleType="fitCenter"
+                android:layout_marginBottom="-35dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginLeft="20dp"
+                android:src="@drawable/ic_project"
+                android:translationZ="20dp" />
 
             <TextView
                 android:id="@+id/title"
-                android:textColor="#262626"
-                android:layout_below="@id/image"
-                android:layout_marginTop="10dp"
-                android:layout_marginLeft="16dp"
-                android:text="Brochure"
-                android:textSize="16sp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_below="@id/nav_icon"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="46dp"
+                android:text="Brochure"
+                android:textColor="#262626"
+                android:textSize="16sp" />
 
             <TextView
                 android:id="@+id/desc"

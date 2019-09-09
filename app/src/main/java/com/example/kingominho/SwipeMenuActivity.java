@@ -37,10 +37,11 @@ public class SwipeMenuActivity extends AppCompatActivity {
         setContentView(R.layout.swipe_menu);
 
         models = new ArrayList<>();
-        models.add(new Model(R.drawable.ic_home, "Home", "Brochure is an informative paper document (often also used for advertising) that can be folded into a template"));
-        models.add(new Model(R.drawable.ic_address_card, "Contact", "Sticker is a type of label: a piece of printed paper, plastic, vinyl, or other material with pressure sensitive adhesive on one side"));
-        models.add(new Model(R.drawable.ic_skills, "Skills", "Poster is any piece of printed paper designed to be attached to a wall or vertical surface."));
-        models.add(new Model(R.drawable.ic_project, "Projects", "Business cards are cards bearing business information about a company or individual."));
+        models.add(new Model(R.drawable.ic_home, R.drawable.ic_home,"Home", "Brochure is an informative paper document (often also used for advertising) that can be folded into a template"));
+        models.add(new Model(R.drawable.ic_address_card, R.drawable.ic_address_card, "Contact", "Sticker is a type of label: a piece of printed paper, plastic, vinyl, or other material with pressure sensitive adhesive on one side"));
+        models.add(new Model(R.drawable.ic_skills, R.drawable.ic_skills,"Skills", "Poster is any piece of printed paper designed to be attached to a wall or vertical surface."));
+        models.add(new Model(R.drawable.ic_project, R.drawable.skin_project,"Projects", "Business cards are cards bearing business information about a company or individual."));
+        models.add(new Model(R.drawable.ic_info_outline_black_24dp, R.drawable.ic_project, "About", "Business cards are cards bearing business information about a company or individual."));
 
         adapter = new Adapter(models, this);
 
