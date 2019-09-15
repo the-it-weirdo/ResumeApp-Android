@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 
 /**
@@ -29,6 +33,11 @@ public class Projects extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     //private static final String ARG_PARAM1 = "param1";
     //private static final String ARG_PARAM2 = "param2";
+    private ArrayList<ProjectListItem> mProjectList;
+    private RecyclerView mRecyclerView;
+    private ProjectListAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
 
 
     //private String mParam1;
@@ -78,19 +87,47 @@ public class Projects extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        final String[] projectList = getResources().getStringArray(R.array.projectsArray);
-        final String[] projectsListToast = getResources().getStringArray(R.array.toastStringsProjects);
+        mRecyclerView = view.findViewById(R.id.projectRecycler);
 
-        ListView listView = (ListView)getView().findViewById(R.id.projectsListView);
+        makeList();
+        buildRecyclerView();
+    }
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, projectList);
-        listView.setAdapter(adapter);
+    public void makeList()
+    {
+        final String[] titleList = getResources().getStringArray(R.array.projectsTitleArray);
+        final String[] durationList = getResources().getStringArray(R.array.projectsDurationArray);
+        final String[] linkList = getResources().getStringArray(R.array.projectsLinkArray);
 
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        if(titleList.length != durationList.length || durationList.length != linkList.length )
+        {
+            throw new RuntimeException("titleList.length, durationList.length, linkList.length must be equal!!");
+        }
+        else {
+            mProjectList = new ArrayList<>();
+
+            for (int i = 0; i < titleList.length; i++) {
+                mProjectList.add(new ProjectListItem(titleList[i], durationList[i], linkList[i]));
+            }
+        }
+    }
+
+    public void buildRecyclerView()
+    {
+        mRecyclerView.setHasFixedSize(true);
+
+        mLayoutManager = new LinearLayoutManager(getActivity());
+        mAdapter = new ProjectListAdapter(mProjectList);
+
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemCLickListener(new ProjectListAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                mListener.onProjectsFragmentListViewInteraction(i, projectsListToast);
-                //Toast.makeText(getActivity(), String.valueOf(projectsListToast[i]), Toast.LENGTH_SHORT).show();
+            public void onGitButtonPressed(int position) {
+                String link = mProjectList.get(position).getLink();
+                Uri uri = Uri.parse(link);
+                mListener.onGitButtonPressed(uri);
             }
         });
     }
@@ -125,6 +162,6 @@ public class Projects extends Fragment {
      */
 
     public interface OnProjectsFragmentInteractionListener {
-        void onProjectsFragmentListViewInteraction(int i, String[] toastArray);
+        void onGitButtonPressed(Uri uri);
     }
 }

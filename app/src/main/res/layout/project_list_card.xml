@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginLeft="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="10dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:background="@color/black"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_toStartOf="@id/git_button"
+            android:layout_toLeftOf="@id/git_button"
+            android:text="@string/projectsLabel"
+            android:textColor="@color/black_overlay"
+            android:textSize="20sp"
+            app:fontFamily="@font/roboto_mono" />
+
+        <TextView
+            android:id="@+id/duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/myName"
+            android:textSize="15sp"
+            android:textColor="@color/grey"
+            android:layout_below="@id/title"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_toStartOf="@id/git_button"
+            android:layout_toLeftOf="@id/git_button" />
+
+        <ImageButton
+            android:id="@+id/git_button"
+            android:layout_width="55dp"
+            android:layout_height="55dp"
+            android:src="@drawable/ic_github_white"
+            android:background="@drawable/round"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="3dp"
+            />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

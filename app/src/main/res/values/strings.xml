@@ -78,18 +78,42 @@
     </string-array>
 
     <!--Projects -->
-    <string-array name="projectsArray">
+    <string-array name="projectsTitleArray">
         <item>Employee Management System using C</item>
         <item>Text Encryptor using C</item>
         <item>ARTO office information App for Android</item>
-        <item>Resume App for Android</item>
+        <item>Resume App for Android Version 0</item>
+        <item>Resume App for Android Version 1</item>
+        <item>Resume App for Android Version 2</item>
         <item>Loan Predictor System using Machine Learning</item>
+    </string-array>
+
+    <string-array name="projectsDurationArray">
+        <item>October, 2017 - August, 2018</item>
+        <item>September, 2018 - October, 2018</item>
+        <item>December, 2018 - March, 2019</item>
+        <item>January, 2019 - February, 2019</item>
+        <item>Month, 2019 - Month, 2019</item>
+        <item>Month, 2019 - Month, 2019</item>
+        <item>June, 2019 - July, 2019</item>
+    </string-array>
+
+    <string-array name="projectsLinkArray">
+        <item>https://github.com/the-it-weirdo/TextEncryptor-C</item>
+        <item>https://github.com/the-it-weirdo/TextEncryptor-C</item>
+        <item>https://github.com/the-it-weirdo/RtoOfficeApp-Android</item>
+        <item>https://github.com/the-it-weirdo/ResumeAppV0-Android</item>
+        <item>https://github.com/the-it-weirdo/ResumeAppV1-Andorid</item>
+        <item>https://github.com/the-it-weirdo/ResumeApp-Android</item>
+        <item>https://github.com/the-it-weirdo/TextEncryptor-C</item>
     </string-array>
 
     <string-array name="toastStringsProjects">
         <item>This is my 1st ever project in Computer Science. I made this during my 1st year of my Bachelor degree.</item>
         <item>This is a simple console program that encrypts a .txt file. Features include password protection.</item>
-        <item>This is my 1st project in Android. It shows the registration status of vehicles to users,</item>
+        <item>This is my 1st project in Android. It shows the registration status of vehicles to users.</item>
+        <item>This is the first implementation of the idea of ResumeApp</item>
+        <item>This is the 2nd implementation of the idea of ResumeApp. It implements Navigation Drawer of Android.</item>
         <item>You are using this app. Hope you like it.</item>
         <item>This is my 1st project in Machine Learning. This project implements 4 machine learning models to predict the outcome of
         a loan status.</item>

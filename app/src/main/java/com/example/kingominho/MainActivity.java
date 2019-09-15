@@ -234,8 +234,9 @@ public class MainActivity extends AppCompatActivity
 
     //Projects.OnProjectsFragmentInteractionListener
     @Override
-    public void onProjectsFragmentListViewInteraction(int i, String[] toastArray) {
-        Toast.makeText(getApplicationContext(), String.valueOf(toastArray[i]), Toast.LENGTH_SHORT).show();
+    public void onGitButtonPressed(Uri uri) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
     }
 
     //Skills.OnSkillsFragmentInteractionListener
