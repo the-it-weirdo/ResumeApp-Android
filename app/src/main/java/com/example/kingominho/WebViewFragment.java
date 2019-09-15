@@ -3,6 +3,7 @@ package com.example.kingominho;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -89,7 +90,6 @@ public class WebViewFragment extends Fragment {
 
         webView = (WebView) getView().findViewById(R.id.webView);
 
-        webView.setVisibility(View.GONE);
 
         final ShimmerFrameLayout container = (ShimmerFrameLayout) getView().findViewById(R.id.shimmer_view_container);
 
@@ -97,11 +97,19 @@ public class WebViewFragment extends Fragment {
         webView.setWebViewClient(new WebViewClient() {
 
             @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                webView.setVisibility(View.GONE);
+                container.setVisibility(View.VISIBLE);
+                container.startShimmer();
+            }
+
+            @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 container.stopShimmer();
-                container.setVisibility(View.GONE);
                 webView.setVisibility(View.VISIBLE);
+                container.setVisibility(View.GONE);
             }
 
             @Override

@@ -4,20 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Contact">
+    tools:context=".Contact"
+    >
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="fill_parent"
+        >
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            >
 
             <ImageButton
                 android:id="@+id/phoneImageButton"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
@@ -25,8 +29,9 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_call_black_24dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline9"
-                app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                android:background="@drawable/top_left"
+                app:layout_constraintBottom_toTopOf="@+id/guidelineMidHorizontal"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineMidVertical"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -34,8 +39,8 @@
 
             <ImageButton
                 android:id="@+id/messageImageButton"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
@@ -43,39 +48,34 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_message_black_24dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline9"
+                android:background="@drawable/top_right"
+                app:layout_constraintBottom_toTopOf="@+id/guidelineMidHorizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
+                app:layout_constraintStart_toStartOf="@+id/guidelineMidVertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="1.0" />
 
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline5"
+                android:id="@+id/guidelineMidVertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_percent="0.50" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline8"
+                android:id="@+id/guidelineMidHorizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.500" />
 
-            <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.25" />
 
             <ImageButton
                 android:id="@+id/mailImageButton"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
@@ -83,16 +83,18 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_email_black_24dp"
-                app:layout_constraintBottom_toTopOf="@+id/guideline8"
-                app:layout_constraintEnd_toStartOf="@+id/guideline5"
+                android:background="@drawable/bottom_left"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guidelineMidVertical"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/guideline9" />
+                app:layout_constraintTop_toTopOf="@+id/guidelineMidHorizontal"
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageButton
                 android:id="@+id/webImageButton"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="8dp"
@@ -100,11 +102,12 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_internet"
-                app:layout_constraintBottom_toTopOf="@+id/guideline8"
+                android:background="@drawable/bottom_right"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/guideline5"
-                app:layout_constraintTop_toTopOf="@+id/guideline9"
+                app:layout_constraintStart_toStartOf="@+id/guidelineMidVertical"
+                app:layout_constraintTop_toTopOf="@+id/guidelineMidHorizontal"
                 app:layout_constraintVertical_bias="0.0" />
 
 
