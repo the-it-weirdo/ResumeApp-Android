@@ -3,7 +3,7 @@ package com.example.kingominho;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
+
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -11,14 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageButton;
 
-import java.net.InetAddress;
+
 
 
 /**
@@ -53,7 +52,7 @@ public class Contact extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment Contact.
      */
-    // TODO: Rename and change types and number of parameters
+
     public static Contact newInstance(String param1, String param2) {
         Contact fragment = new Contact();
         /*Bundle args = new Bundle();
@@ -85,10 +84,11 @@ public class Contact extends Fragment {
 
         getActivity().setTitle(getActivity().getResources().getString(R.string.contactLabel));
 
-        ImageButton callButton = (ImageButton) getView().findViewById(R.id.phoneImageButton);
-        ImageButton mailButton = (ImageButton) getView().findViewById(R.id.mailImageButton);
-        ImageButton smsButton = (ImageButton) getView().findViewById(R.id.messageImageButton);
-        ImageButton webButton = (ImageButton) getView().findViewById(R.id.webImageButton);
+        final ImageButton callButton = (ImageButton) getView().findViewById(R.id.phoneImageButton);
+        final ImageButton mailButton = (ImageButton) getView().findViewById(R.id.mailImageButton);
+        final ImageButton smsButton = (ImageButton) getView().findViewById(R.id.messageImageButton);
+        final ImageButton webButton = (ImageButton) getView().findViewById(R.id.webImageButton);
+
 
         callButton.setOnClickListener(new View.OnClickListener() {
             @Override

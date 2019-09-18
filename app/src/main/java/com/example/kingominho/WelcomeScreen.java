@@ -28,6 +28,7 @@ public class WelcomeScreen extends AppCompatActivity {
             public void run() {
                 Intent i = new Intent(getApplicationContext(), SwipeMenuActivity.class);
                 startActivity(i);
+                overridePendingTransition(R.anim.go_up, R.anim.go_down);
                 finish();
             }
         }, delay);

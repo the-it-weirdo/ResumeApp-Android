@@ -1,5 +1,6 @@
 package com.example.kingominho;
 
+import androidx.annotation.AnimatorRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -16,6 +17,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 public class DetailsActivity extends AppCompatActivity implements Home.OnHomeFragmentInteractionListener,
@@ -41,6 +44,7 @@ public class DetailsActivity extends AppCompatActivity implements Home.OnHomeFra
     public void onBackPressed() {
         WebViewFragment webViewFragment = (WebViewFragment) getSupportFragmentManager().findFragmentByTag(webViewFragmentTag);
         MailForm mailForm = (MailForm) getSupportFragmentManager().findFragmentByTag(mailFormFragmentTag);
+        overridePendingTransition(R.anim.go_up, R.anim.go_down);
         if (mailForm != null && mailForm.isVisible()) {
             mailForm.onBackButtonPressed();
         } else if (webViewFragment != null && webViewFragment.isVisible()) {
@@ -68,13 +72,63 @@ public class DetailsActivity extends AppCompatActivity implements Home.OnHomeFra
             case "Projects":
                 fragment = new Projects();
                 break;
+            case "MailForm":
+                fragment = new MailForm();
+                break;
             default:
                 Toast.makeText(getApplicationContext(), "Fragment not ready.", Toast.LENGTH_SHORT).show();
         }
 
         if (fragment != null) {
             FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.frame, fragment);
+            if(param.equals("MailForm"))
+            {
+                fragmentTransaction.replace(R.id.frame, fragment, mailFormFragmentTag);
+            }
+            else
+            {
+                fragmentTransaction.replace(R.id.frame, fragment);
+            }
+            //fragmentTransaction.addToBackStack(null);
+            fragmentTransaction.commit();
+        }
+    }
+
+    void showFragment(String param, int animationEntry, int animationExit)
+    {
+        Fragment fragment = null;
+
+        switch (param) {
+            case "Home":
+                fragment = new Home();
+                break;
+            case "Contact":
+                fragment = new Contact();
+                break;
+            case "Skills":
+                fragment = new Skills();
+                break;
+            case "Projects":
+                fragment = new Projects();
+                break;
+            case "MailForm":
+                fragment = new MailForm();
+                break;
+            default:
+                Toast.makeText(getApplicationContext(), "Fragment not ready.", Toast.LENGTH_SHORT).show();
+        }
+
+        if (fragment != null) {
+            FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+            fragmentTransaction.setCustomAnimations(animationEntry, animationExit, animationEntry, animationExit);
+            if(param.equals("MailForm"))
+            {
+                fragmentTransaction.replace(R.id.frame, fragment, mailFormFragmentTag);
+            }
+            else
+            {
+                fragmentTransaction.replace(R.id.frame, fragment);
+            }
             //fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
         }
@@ -129,6 +183,7 @@ public class DetailsActivity extends AppCompatActivity implements Home.OnHomeFra
             Intent call = new Intent(Intent.ACTION_DIAL);
             call.setData(uri);
             startActivity(call);
+            overridePendingTransition(R.anim.go_up, R.anim.go_down);
         }
     }
 
@@ -142,6 +197,7 @@ public class DetailsActivity extends AppCompatActivity implements Home.OnHomeFra
     public void onGitButtonPressed(Uri uri) {
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
+        overridePendingTransition(R.anim.go_up, R.anim.go_down);
     }
 
     //Skills.OnSkillsFragmentInteractionListener
@@ -153,11 +209,14 @@ public class DetailsActivity extends AppCompatActivity implements Home.OnHomeFra
     //Contact.OnContactFragmentInteractionListener
     @Override
     public void onMailButtonPressed() {
-        MailForm fragment = new MailForm();
+        showFragment("MailForm", R.anim.go_up, R.anim.go_down);
+        /*MailForm fragment = new MailForm();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.go_up, R.anim.go_down, R.anim.go_up, R.anim.go_down);
         fragmentTransaction.replace(R.id.frame, fragment, mailFormFragmentTag);
         //fragmentTransaction.addToBackStack(null);
-        fragmentTransaction.commit();
+        fragmentTransaction.commit();*/
+
     }
 
     @Override
@@ -167,6 +226,7 @@ public class DetailsActivity extends AppCompatActivity implements Home.OnHomeFra
         Intent intent = new Intent(Intent.ACTION_SENDTO, Uri.parse("smsto:" + number));
         Intent chooser = Intent.createChooser(intent, getResources().getString(R.string.smsPrompt));
         startActivity(chooser);
+        overridePendingTransition(R.anim.go_up, R.anim.go_down);
     }
 
     @Override
@@ -176,6 +236,7 @@ public class DetailsActivity extends AppCompatActivity implements Home.OnHomeFra
         args.putString("url", url);
         fragment.setArguments(args);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        fragmentTransaction.setCustomAnimations(R.anim.go_up, R.anim.go_down, R.anim.go_up, R.anim.go_down);
         fragmentTransaction.replace(R.id.frame, fragment, webViewFragmentTag);
         //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
@@ -193,16 +254,17 @@ public class DetailsActivity extends AppCompatActivity implements Home.OnHomeFra
         intent.putExtra(Intent.EXTRA_TEXT, body);
         Intent chooser = Intent.createChooser(intent, getResources().getString(R.string.mailPrompt));
         startActivity(chooser);
+        overridePendingTransition(R.anim.go_up, R.anim.go_down);
     }
 
     @Override
     public void onBackPressedFromMailForm() {
-        showFragment("Contact");
+        showFragment("Contact", R.anim.go_up, R.anim.go_down);
     }
 
     //WebViewFragment.OnWebViewFragmentInteractionListener
     @Override
     public void onWebViewFragmentBackButtonPressedFromHomeWebsite() {
-        showFragment("Contact");
+        showFragment("Contact", R.anim.go_up, R.anim.go_down);
     }
 }

@@ -4,15 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import android.animation.ArgbEvaluator;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class SwipeMenuActivity extends AppCompatActivity {
+public class SwipeMenuActivity extends AppCompatActivity implements Adapter.AdapterOnCardClickListener {
 
     ViewPager viewPager;
     Adapter adapter;
@@ -125,6 +128,7 @@ public class SwipeMenuActivity extends AppCompatActivity {
         mToast.show();
 
         mHandler.postDelayed(mRunnable, delay);
+        overridePendingTransition(R.anim.go_up, R.anim.go_down);
     }
 
 
@@ -137,5 +141,13 @@ public class SwipeMenuActivity extends AppCompatActivity {
         if (mHandler != null) {
             mHandler.removeCallbacks(mRunnable);
         }
+    }
+
+    @Override
+    public void onCardClick(String param) {
+        Intent intent = new Intent(getApplicationContext(), DetailsActivity.class);
+        intent.putExtra("param", param);
+        startActivity(intent);
+        overridePendingTransition(R.anim.go_up, R.anim.go_down);
     }
 }
