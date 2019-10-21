@@ -99,13 +99,13 @@
     </string-array>
 
     <string-array name="projectsLinkArray">
-        <item>https://github.com/the-it-weirdo/TextEncryptor-C</item>
+        <item>https://github.com/the-it-weirdo/EmployeeManagementSystem-C</item>
         <item>https://github.com/the-it-weirdo/TextEncryptor-C</item>
         <item>https://github.com/the-it-weirdo/RtoOfficeApp-Android</item>
         <item>https://github.com/the-it-weirdo/ResumeAppV0-Android</item>
         <item>https://github.com/the-it-weirdo/ResumeAppV1-Andorid</item>
         <item>https://github.com/the-it-weirdo/ResumeApp-Android</item>
-        <item>https://github.com/the-it-weirdo/TextEncryptor-C</item>
+        <item>https://github.com/the-it-weirdo/LoanApplicationStatusPrediction-ML</item>
     </string-array>
 
     <string-array name="toastStringsProjects">
